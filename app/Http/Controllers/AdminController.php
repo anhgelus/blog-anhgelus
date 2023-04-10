@@ -50,21 +50,34 @@ class AdminController extends Controller
     {
         $credentials = $request->validated();
 
-        if ($credentials['modify']==="password") {
+        if ($credentials['update']==="password") {
             if (!isset($credentials['password'])) {
                 return to_route('admin.overview')->with('alert', "La clef password est nulle");
             }
             $user = Auth::user();
             $user->password = Hash::make($credentials['password']);
             $user->save();
-        } else if ($credentials['modify']==="email") {
+        } else if ($credentials['update']==="email") {
             if (!isset($credentials['email'])) {
                 return to_route('admin.overview')->with('alert', "La clef email est nulle");
             }
             $user = Auth::user();
             $user->email = $credentials['email'];
             $user->save();
+        } else if ($credentials['update']==='new_user') {
+            if (!isset($credentials['email'])) {
+                return to_route('admin.overview')->with('alert', "La clef email est nulle");
+            }
+            if (!isset($credentials['password'])) {
+                return to_route('admin.overview')->with('alert', "La clef password est nulle");
+            }
+            User::create([
+                'email'=>$credentials['email'],
+                'password'=>Hash::make($credentials['password']),
+                'name'=>$credentials['email']
+            ]);
+            return to_route('admin.overview')->with('success', "L'utilisateur ".$credentials['email']." a bien été ajouté");
         }
-        return to_route('admin.overview')->with('success', "La clef ".$credentials['modify']." a bien été modifiée");
+        return to_route('admin.overview')->with('success', "La clef ".$credentials['update']." a bien été modifiée");
     }
 }

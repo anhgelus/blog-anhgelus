@@ -23,7 +23,7 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'modify'=>'required',
+            'update'=>'required',
             'password'=>'min:4',
             'email'=>'email'
         ];
