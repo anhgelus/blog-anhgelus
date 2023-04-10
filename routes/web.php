@@ -17,8 +17,8 @@ Route::get('/', function () {
     return view('root');
 })->name('root');
 
-Route::prefix('/article')->name('article')->group(function () {
-
+Route::prefix('/article')->name('article')->controller(\App\Http\Controllers\ArticleController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
 });
 
 Route::prefix('/admin')->name('admin')->group(function () {
