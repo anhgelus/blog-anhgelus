@@ -51,12 +51,15 @@
             <div class="navbar-item">
                 <div class="buttons">
                     @guest()
-                        <a class="button is-light" href="{{ route('auth.login') }}">
+                        <a class="button is-primary" href="{{ route('auth.login') }}">
                             Se connecter
                         </a>
                     @endguest
                     @auth()
-                        <a class="button is-light" href="{{ route('auth.logout') }}">
+                        <a class="button is-light" href="{{ route('admin.overview') }}">
+                            Panel Admin
+                        </a>
+                        <a class="button is-primary" href="{{ route('auth.logout') }}">
                             Se déconnecter
                         </a>
                     @endauth
