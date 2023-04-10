@@ -50,11 +50,8 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-primary">
-                        <strong>Sign up</strong>
-                    </a>
-                    <a class="button is-light">
-                        Log in
+                    <a class="button is-light" href="{{ route('admin.login') }}">
+                        Admin
                     </a>
                 </div>
             </div>

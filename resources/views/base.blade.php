@@ -13,6 +13,21 @@
     @include('parts.header')
     <section class="section">
         <div class="container">
+            @if(session('success'))
+                <div class="notification is-success">
+                    {{ session('success') }}
+                </div>
+            @endif
+            @if(session('alert'))
+                <div class="notification is-danger">
+                    {{ session('alert') }}
+                </div>
+            @endif
+            @if(session('warning'))
+                <div class="notification is-warning">
+                    {{ session('warning') }}
+                </div>
+            @endif
             @yield('content')
         </div>
     </section>

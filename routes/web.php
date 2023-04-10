@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +19,7 @@ Route::get('/', function () {
     return view('root');
 })->name('root');
 
-Route::prefix('/article')->name('article.')->controller(\App\Http\Controllers\ArticleController::class)->group(function () {
+Route::prefix('/article')->name('article.')->controller(ArticleController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/{slug}-{id}', 'read')->name('read')
         ->where([
@@ -30,6 +32,8 @@ Route::prefix('/article')->name('article.')->controller(\App\Http\Controllers\Ar
         ]);
 });
 
-Route::prefix('/admin')->name('admin')->group(function () {
-
+Route::prefix('/admin')->name('admin.')->controller(AdminController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/login', 'login')->name('login');
+    Route::post('/login','loginChallenge');
 });
