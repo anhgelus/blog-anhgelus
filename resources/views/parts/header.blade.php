@@ -50,9 +50,16 @@
         <div class="navbar-end">
             <div class="navbar-item">
                 <div class="buttons">
-                    <a class="button is-light" href="{{ route('admin.login') }}">
-                        Admin
-                    </a>
+                    @guest()
+                        <a class="button is-light" href="{{ route('auth.login') }}">
+                            Se connecter
+                        </a>
+                    @endguest
+                    @auth()
+                        <a class="button is-light" href="{{ route('auth.logout') }}">
+                            Se déconnecter
+                        </a>
+                    @endauth
                 </div>
             </div>
         </div>

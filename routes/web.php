@@ -32,10 +32,16 @@ Route::prefix('/article')->name('article.')->controller(ArticleController::class
         ]);
 });
 
-Route::prefix('/admin')->name('admin.')->controller(AdminController::class)->group(function () {
-    Route::get('/', 'index')->name('overview');
-    Route::get('/articles', 'index')->name('articles');
-    Route::get('/tags', 'index')->name('tags');
+Route::prefix('/admin')->name('admin.')->controller(AdminController::class)
+    ->middleware('auth')
+    ->group(function () {
+        Route::get('/', 'index')->name('overview');
+        Route::get('/articles', 'index')->name('articles');
+        Route::get('/tags', 'index')->name('tags');
+    });
+
+Route::prefix('/admin')->name('auth.')->controller(AdminController::class)->group(function () {
     Route::get('/login', 'login')->name('login');
-    Route::post('/login','loginChallenge');
+    Route::post('/login','challenge');
+    Route::get('/logout', 'logout')->name('logout');
 });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Tag;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,6 +19,9 @@ return new class extends Migration
             $table->string('color'); // hex
             $table->timestamps();
         });
+        Schema::table('posts', function (Blueprint $table) {
+            $table->foreignIdFor(Tag::class)->constrained()->cascadeOnDelete();
+        });
     }
 
     /**
@@ -26,5 +30,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('tags');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropForeignIdFor(Tag::class);
+        });
     }
 };

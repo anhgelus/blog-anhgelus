@@ -17,4 +17,9 @@ class Post extends Model
       "slug",
       "content"
     ];
+
+    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Tag::class);
+    }
 }
