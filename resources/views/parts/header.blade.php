@@ -1,3 +1,6 @@
+@php
+    $route = request()->route()->getName();
+@endphp
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
         <a class="navbar-item" href="https://bulma.io">
@@ -13,7 +16,7 @@
 
     <div id="navbarBasicExample" class="navbar-menu">
         <div class="navbar-start">
-            <a class="navbar-item">
+            <a @class(["navbar-item", 'is-active' => $route === 'root'])>
                 Home
             </a>
 
