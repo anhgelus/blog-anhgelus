@@ -36,13 +36,13 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)
     ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('overview');
-        Route::post('/', 'update');
         Route::get('/articles', 'index')->name('articles');
         Route::get('/tags', 'index')->name('tags');
     });
 
-Route::prefix('/admin')->name('auth.')->controller(AdminController::class)->group(function () {
+Route::prefix('/admin')->name('auth.')->controller(\App\Http\Controllers\AuthController::class)->group(function () {
     Route::get('/login', 'login')->name('login');
     Route::post('/login','challenge');
     Route::get('/logout', 'logout')->name('logout');
+    Route::post('/', 'update')->middleware('auth');
 });
