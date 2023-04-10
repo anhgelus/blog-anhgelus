@@ -36,6 +36,7 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)
     ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('overview');
+        Route::post('/', 'update');
         Route::get('/articles', 'index')->name('articles');
         Route::get('/tags', 'index')->name('tags');
     });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\UpdateRequest;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -43,5 +44,27 @@ class AdminController extends Controller
         Auth::logout();
         return redirect()->intended(route('root'))
             ->with('success', 'Vous êtes bien déconnectés');
+    }
+
+    public function update(UpdateRequest $request): RedirectResponse
+    {
+        $credentials = $request->validated();
+
+        if ($credentials['modify']==="password") {
+            if (!isset($credentials['password'])) {
+                return to_route('admin.overview')->with('alert', "La clef password est nulle");
+            }
+            $user = Auth::user();
+            $user->password = Hash::make($credentials['password']);
+            $user->save();
+        } else if ($credentials['modify']==="email") {
+            if (!isset($credentials['email'])) {
+                return to_route('admin.overview')->with('alert', "La clef email est nulle");
+            }
+            $user = Auth::user();
+            $user->email = $credentials['email'];
+            $user->save();
+        }
+        return to_route('admin.overview')->with('success', "La clef ".$credentials['modify']." a bien été modifiée");
     }
 }
