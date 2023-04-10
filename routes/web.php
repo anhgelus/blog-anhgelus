@@ -17,8 +17,17 @@ Route::get('/', function () {
     return view('root');
 })->name('root');
 
-Route::prefix('/article')->name('article')->controller(\App\Http\Controllers\ArticleController::class)->group(function () {
+Route::prefix('/article')->name('article.')->controller(\App\Http\Controllers\ArticleController::class)->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('/{slug}-{id}', 'read')->name('read')
+        ->where([
+            'slug' => '[0-9a-z\-]+',
+            'id' => '[0-9]+'
+        ]);
+    Route::get('/{id}', 'redirect')->name('redirect')
+        ->where([
+            'id' => '[0-9]+'
+        ]);
 });
 
 Route::prefix('/admin')->name('admin')->group(function () {
