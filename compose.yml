@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb:10
+    environment:
+      MARIADB_ROOT_PASSWORD: 'root'
+      MARIADB_DATABASE: 'laravel'
+    volumes:
+      - /storage/mariadb:/var/lib/mysql
+    ports:
+      - '3306'
