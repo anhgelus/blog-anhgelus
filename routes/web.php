@@ -15,4 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('root');
+})->name('root');
+
+Route::prefix('/article')->name('article')->group(function () {
+
+});
+
+Route::prefix('/admin')->name('admin')->group(function () {
+
 });
