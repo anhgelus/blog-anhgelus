@@ -8,9 +8,10 @@ use Illuminate\View\View;
 
 class AdminController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         //TODO: handle when user is not logged
+        return view('admin.overview');
     }
 
     public function login(): View
@@ -24,6 +25,6 @@ class AdminController extends Controller
         $username = $request->get('username');
         $password = $request->get('password');
 
-        return to_route('root')->with('success', 'Vous êtes bien connecté en tant que '.$username);
+        return to_route('admin.overview')->with('success', 'Vous êtes bien connecté en tant que '.$username);
     }
 }

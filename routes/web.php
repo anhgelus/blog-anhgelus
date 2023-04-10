@@ -33,7 +33,9 @@ Route::prefix('/article')->name('article.')->controller(ArticleController::class
 });
 
 Route::prefix('/admin')->name('admin.')->controller(AdminController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
+    Route::get('/', 'index')->name('overview');
+    Route::get('/articles', 'index')->name('articles');
+    Route::get('/tags', 'index')->name('tags');
     Route::get('/login', 'login')->name('login');
     Route::post('/login','loginChallenge');
 });
