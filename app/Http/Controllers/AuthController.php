@@ -13,14 +13,30 @@ use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function login(): View | RedirectResponse
+    public function login(): View
     {
+        $first = User::first();
+        if (!$first) {
+            return view('admin.first_connection');
+        }
         return view('admin.login');
+    }
+
+    private function firstConnection(LoginRequest $request): RedirectResponse
+    {
+        $credentials = $request->validated();
+        $this->newUser($credentials);
+        return to_route('auth.login')->with('success', "L'utilisateur ".$credentials['email']." a bien été créé");
     }
 
     public function challenge(LoginRequest $request): RedirectResponse
     {
         $credentials = $request->validated();
+
+        $first = User::first();
+        if (!$first) {
+            return $this->firstConnection($request);
+        }
 
         if (!Auth::attempt($credentials)) {
             return to_route('admin.overview')->with('warning', "Nom d'utilisateur ou mot de passe invalide")
@@ -65,13 +81,18 @@ class AuthController extends Controller
             if (!isset($credentials['password'])) {
                 return to_route('admin.overview')->with('alert', "La clef password est nulle");
             }
-            User::create([
-                'email'=>$credentials['email'],
-                'password'=>Hash::make($credentials['password']),
-                'name'=>$credentials['email']
-            ]);
+            $this->newUser($credentials);
             return to_route('admin.overview')->with('success', "L'utilisateur ".$credentials['email']." a bien été ajouté");
         }
         return to_route('admin.overview')->with('success', "La clef ".$credentials['update']." a bien été modifiée");
+    }
+
+    private function newUser(array $credentials): void
+    {
+        User::create([
+            'email'=>$credentials['email'],
+            'password'=>Hash::make($credentials['password']),
+            'name'=>$credentials['email']
+        ]);
     }
 }

@@ -41,8 +41,9 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)
     });
 
 Route::prefix('/admin')->name('auth.')->controller(\App\Http\Controllers\AuthController::class)->group(function () {
-    Route::get('/login', 'login')->name('login');
+    Route::get('/login', 'login')->name('login')->middleware('guest');
+    Route::post('/login', 'firstConnection');
     Route::post('/login','challenge');
-    Route::get('/logout', 'logout')->name('logout');
+    Route::get('/logout', 'logout')->name('logout')->middleware('auth');
     Route::post('/', 'update')->middleware('auth');
 });

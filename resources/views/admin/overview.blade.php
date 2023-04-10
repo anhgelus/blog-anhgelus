@@ -1,9 +1,9 @@
 @extends('base')
 
-@section('title', 'Admin')
+    @section('title', 'Admin')
 
 @section('content')
-    @include('admin.menu')
+    @include('admin.part.menu')
     <section class="section">
         <h3 class="title is-4">Modifier vos paramètres</h3>
         <div class="columns">
@@ -47,34 +47,7 @@
     <section class="section">
         <h3 class="title is-4">Ajouter un utilisateur</h3>
         <form action="?update=new_user" method="post">
-            @csrf
-            <div class="field">
-                <label class="label" for="email">Email</label>
-                <div class="control has-icons-left has-icons-right">
-                    <input class="input" type="email" placeholder="Email" name="email" id="email" value="{{old('email')}}" required>
-                    <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
-                </div>
-                @error('email')
-                {{$message}}
-                @enderror
-            </div>
-
-            <div class="field">
-                <label class="label" for="password">Mot de passe</label>
-                <div class="control has-icons-left has-icons-right">
-                    <input class="input" type="password" placeholder="Password" name="password" id="password" required>
-                    <span class="icon is-small is-left"><i class="fas fa-lock"></i></span>
-                </div>
-                @error('password')
-                {{$message}}
-                @enderror
-            </div>
-
-            <div class="field">
-                <div class="control">
-                    <button class="button is-link">Submit</button>
-                </div>
-            </div>
+            @include('admin.part.create_user')
         </form>
     </section>
 @endsection
