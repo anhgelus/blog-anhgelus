@@ -1,7 +1,7 @@
 import {marked} from "marked";
 
 export function parseMarkdown(element: Element) {
-    let content = marked.parse(element.innerHTML);
+    let content = marked.parse(element.innerHTML.trim());
     element.classList.add('content')
 
     content = replaceTitles(content)
