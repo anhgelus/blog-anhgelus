@@ -19,8 +19,8 @@ class AdminController extends Controller
     public function article(): View
     {
         $stats = [
-            'post_total' => Post::count(),
-            'tag_total' => Tag::count()
+        'post_total' => Post::count(),
+        'tag_total' => Tag::count()
         ];
         return view('admin.article', [
             'stats'=>$stats,
@@ -44,5 +44,17 @@ class AdminController extends Controller
             'slug'=>$data['slug'],
         ])->tags()->sync(str_split($data['tags'], ','));
         return to_route('admin.article')->with('success', 'Article créé!');
+    }
+
+    public function tags(): View
+    {
+        $stats = [
+            'post_total' => Post::count(),
+            'tag_total' => Tag::count()
+        ];
+        return view('admin.tags', [
+            'tags'=>Tag::all(),
+            "stats"=>$stats
+        ]);
     }
 }

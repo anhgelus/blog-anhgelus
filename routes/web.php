@@ -34,18 +34,24 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)
     ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('overview');
-        Route::prefix('/article')->name('article')->group(function () {
-            Route::get('/', 'article')->name('');
-            Route::get('/new', 'new')->name('.new');
-            Route::post('/new', 'store');
-            Route::get('/edit/{post}', 'article')->name('.edit')->where([
-                'post'=>'[0-9]+'
-            ]);
-            Route::get('/delete/{post}', 'article')->name('.delete')->where([
-                'post'=>'[0-9]+'
-            ]);
-        });
-        Route::get('/tags', 'index')->name('tags');
+        Route::get('/article', 'article')->name('article');
+        Route::get('/article/new', 'new')->name('article.new');
+        Route::post('/article/new', 'store');
+        Route::get('/article/edit/{post}', 'article')->name('article.edit')->where([
+            'post'=>'[0-9]+'
+        ]);
+        Route::get('/article/delete/{post}', 'article')->name('article.delete')->where([
+        'post'=>'[0-9]+'
+        ]);
+        Route::get('/tags', 'tags')->name('tags');
+        Route::get('/tags/new', 'newTag')->name('tags.new');
+        Route::post('/tags/new', 'storeTag');
+        Route::get('/tags/edit/{post}', 'tags')->name('tags.edit')->where([
+            'post'=>'[0-9]+'
+        ]);
+        Route::get('/tags/delete/{post}', 'tags')->name('tags.delete')->where([
+            'post'=>'[0-9]+'
+        ]);
     });
 
 Route::prefix('/admin')->name('auth.')->controller(\App\Http\Controllers\AuthController::class)->group(function () {
