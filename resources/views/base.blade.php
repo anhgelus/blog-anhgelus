@@ -10,26 +10,38 @@
     <title>@yield('title') - Anhgelus Blog</title>
 </head>
 <body>
-    @include('parts.header')
-    <section class="section">
-        <div class="container">
-            @if(session('success'))
-                <div class="notification is-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if(session('alert'))
-                <div class="notification is-danger">
-                    {{ session('alert') }}
-                </div>
-            @endif
-            @if(session('warning'))
-                <div class="notification is-warning">
-                    {{ session('warning') }}
-                </div>
-            @endif
-            @yield('content')
+<header>
+    @include('parts.navbar')
+    <div class="hero is-link">
+        <div class="hero-body">
+            <h1 class="title is-2">
+                @yield('hero-title', 'Anhgelus Blog')
+            </h1>
+            <p class="subtitle is-4">
+                @yield('hero-subtitle', '')
+            </p>
         </div>
-    </section>
+    </div>
+</header>
+<section class="section">
+    <div class="container">
+        @if(session('success'))
+            <div class="notification is-success">
+                {{ session('success') }}
+            </div>
+        @endif
+        @if(session('alert'))
+            <div class="notification is-danger">
+                {{ session('alert') }}
+            </div>
+        @endif
+        @if(session('warning'))
+            <div class="notification is-warning">
+                {{ session('warning') }}
+            </div>
+        @endif
+        @yield('content')
+    </div>
+</section>
 </body>
 </html>

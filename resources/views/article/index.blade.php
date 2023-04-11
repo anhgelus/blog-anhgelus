@@ -2,6 +2,9 @@
 
 @section('title', 'Articles')
 
+@section('hero-title', 'Articles')
+@section('hero-subtitle', 'Retrouvez tous nos derniers articles !')
+
 @section('content')
     @foreach($paginator->items() as $article)
         <article class="section">

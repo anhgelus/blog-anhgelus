@@ -1,6 +1,8 @@
 @extends('base')
 
-    @section('title', 'Admin')
+@section('title', 'Admin')
+
+@section('hero-title', 'Administration')
 
 @section('content')
     @include('admin.part.menu')

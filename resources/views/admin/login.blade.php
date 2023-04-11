@@ -2,6 +2,8 @@
 
 @section('title', 'Login')
 
+@section('hero-title', 'Connexion')
+
 @section('content')
     <form action="" method="post">
         @csrf
