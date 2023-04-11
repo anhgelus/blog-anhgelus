@@ -1,16 +1,17 @@
 @extends('base')
 
-@section('title', 'Créer un article')
+@section('title', 'Éditer un article')
 
-@section('hero-title', 'Nouvel article')
+@section('hero-title', 'Éditer l\'article "'. substr($post->title, 0, 10).'"')
 
 @section('content')
+    <a class="button is-link is-outlined mb-5" href="{{route('admin.article')}}">Revenir à la page précédente</a>
     <form action="" method="post">
         @csrf
         <div class="field">
             <label class="label" for="title">Titre</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="Titre" name="title" id="title" value="{{old('title')}}" required>
+                <input class="input" type="text" placeholder="Titre" name="title" id="title" value="{{$post->title}}" required>
                 <span class="icon is-small is-left"><i class="fas fa-newspaper"></i></span>
             </div>
             @error('title')
@@ -21,20 +22,23 @@
         <div class="field">
             <label class="label" for="slug">Slug</label>
             <div class="control has-icons-left has-icons-right">
-                <input class="input" type="text" placeholder="Slug" name="slug" id="slug" value="{{old('slug')}}">
+                <input class="input" type="text" placeholder="Slug" name="slug" id="slug" value="{{$post->slug}}">
                 <span class="icon is-small is-left"><i class="fas fa-angle-right"></i></span>
             </div>
             @error('slug')
                 <p class="help">{{$message}}</p>
             @enderror
         </div>
+        @php
+        $tagsId = $post->tags->pluck('id');
+        @endphp
         <div class="field">
             <label class="label" for="tag">Tag.s</label>
             <div class="control">
                 <div class="select is-multiple">
                     <select id="tag" name="tags[]" multiple>
                     @foreach($tags as $tag)
-                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                        <option @selected($tagsId->contains($tag->id)) value="{{$tag->id}}">{{$tag->name}}</option>
                     @endforeach
                     </select>
                 </div>
@@ -47,7 +51,7 @@
         <div class="field">
             <label class="label" for="content">Contenu</label>
             <div class="control">
-                <textarea class="textarea" placeholder="Contenu" name="content" id="content">{{old('content')}}</textarea>
+                <textarea class="textarea" placeholder="Contenu" name="content" id="content">{{$post->content}}</textarea>
             </div>
             @error('content')
                 <p class="help">{{$message}}</p>

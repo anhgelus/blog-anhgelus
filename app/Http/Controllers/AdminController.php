@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\NewArticleRequest;
 use App\Http\Requests\NewTagRequest;
+use App\Http\Requests\UpdateArticleRequest;
+use App\Http\Requests\UpdateTagRequest;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
@@ -47,6 +49,17 @@ class AdminController extends Controller
         return to_route('admin.article')->with('success', 'Article créé!');
     }
 
+    public function edit(Post $post): View
+    {
+        return view('admin.article.edit', ['post'=>$post,'tags'=>Tag::all()]);
+    }
+
+    public function storeEdit(Post $post, UpdateArticleRequest $request): RedirectResponse
+    {
+        $post->update($request->validated());
+        return to_route('admin.article')->with('success', 'Article modifié!');
+    }
+
     public function tags(): View
     {
         $stats = [
@@ -72,5 +85,16 @@ class AdminController extends Controller
             'description'=>$data['description'],
         ]);
         return to_route('admin.tags')->with('success', 'Tag créé!');
+    }
+
+    public function editTags(Tag $tag)
+    {
+        return view('admin.tags.edit', ['tag'=>$tag]);
+    }
+
+    public function storeEditTags(Tag $tag, UpdateTagRequest $request)
+    {
+        $tag->update($request->validated());
+        return to_route('admin.tags')->with('success', 'Tag modifié!');
     }
 }

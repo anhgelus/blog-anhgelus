@@ -32,8 +32,8 @@
                         {{ $tag->name }}
                     </p>
                     <div class="ml-auto">
-                        <a class="button" href="{{ route('admin.tags.edit',['post'=>$tag->id]) }}">Éditer</a>
-                        <a class="button is-danger is-outlined" href="{{ route('admin.tags.delete', ['post'=>$tag->id]) }}">Supprimer</a>
+                        <a class="button" href="{{ route('admin.tags.edit',['tag'=>$tag->id]) }}">Éditer</a>
+                        <a class="button is-danger is-outlined" href="{{ route('admin.tags.delete', ['tag'=>$tag->id]) }}">Supprimer</a>
                     </div>
                 </div>
             @endforeach

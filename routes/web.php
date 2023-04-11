@@ -37,19 +37,25 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)
         Route::get('/article', 'article')->name('article');
         Route::get('/article/new', 'new')->name('article.new');
         Route::post('/article/new', 'store');
-        Route::get('/article/edit/{post}', 'article')->name('article.edit')->where([
+        Route::get('/article/edit/{post}', 'edit')->name('article.edit')->where([
+            'post'=>'[0-9]+'
+        ]);
+        Route::post('/article/edit/{post}', 'storeEdit')->where([
             'post'=>'[0-9]+'
         ]);
         Route::get('/article/delete/{post}', 'article')->name('article.delete')->where([
-        'post'=>'[0-9]+'
+            'post'=>'[0-9]+'
         ]);
         Route::get('/tags', 'tags')->name('tags');
         Route::get('/tags/new', 'newTag')->name('tags.new');
         Route::post('/tags/new', 'storeTag');
-        Route::get('/tags/edit/{post}', 'tags')->name('tags.edit')->where([
+        Route::get('/tags/edit/{tag}', 'editTags')->name('tags.edit')->where([
             'post'=>'[0-9]+'
         ]);
-        Route::get('/tags/delete/{post}', 'tags')->name('tags.delete')->where([
+        Route::post('/tags/edit/{tag}', 'storeEditTags')->where([
+            'post'=>'[0-9]+'
+        ]);
+        Route::get('/tags/delete/{tag}', 'tags')->name('tags.delete')->where([
             'post'=>'[0-9]+'
         ]);
     });
