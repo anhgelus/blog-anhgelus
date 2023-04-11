@@ -2,20 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\UpdateRequest;
-use App\Models\User;
+use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
 
 
 class AdminController extends Controller
 {
-    public function index(Request $request): View | RedirectResponse
+    public function index(): View | RedirectResponse
     {
         return view('admin.overview');
+    }
+
+    public function article(): View
+    {
+        $stats = [
+            'post_total' => Post::count(),
+            'tag_total' => Tag::count()
+        ];
+        return view('admin.article', [
+            'stats'=>$stats,
+            'articles'=>Post::all()
+        ]);
     }
 }

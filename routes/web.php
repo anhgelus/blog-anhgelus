@@ -21,13 +21,11 @@ Route::get('/', function () {
 
 Route::prefix('/article')->name('article.')->controller(ArticleController::class)->group(function () {
     Route::get('/', 'index')->name('index');
-    Route::get('/{slug}-{id}', 'read')->name('read')
-        ->where([
+    Route::get('/{slug}-{id}', 'read')->name('read')->where([
             'slug' => '[0-9a-z\-]+',
             'id' => '[0-9]+'
         ]);
-    Route::get('/{id}', 'redirect')->name('redirect')
-        ->where([
+    Route::get('/{id}', 'redirect')->name('redirect')->where([
             'id' => '[0-9]+'
         ]);
 });
@@ -36,7 +34,16 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)
     ->middleware('auth')
     ->group(function () {
         Route::get('/', 'index')->name('overview');
-        Route::get('/articles', 'index')->name('articles');
+        Route::prefix('/article')->name('article')->group(function () {
+            Route::get('/', 'article')->name('');
+            Route::get('/article/new', 'article')->name('.new');
+            Route::get('/article/edit/{post}', 'article')->name('.edit')->where([
+                'post'=>'[0-9]+'
+            ]);
+            Route::get('/article/delete/{post}', 'article')->name('.delete')->where([
+                'post'=>'[0-9]+'
+            ]);
+        });
         Route::get('/tags', 'index')->name('tags');
     });
 
