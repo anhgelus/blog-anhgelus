@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewArticleRequest;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
@@ -23,7 +24,25 @@ class AdminController extends Controller
         ];
         return view('admin.article', [
             'stats'=>$stats,
-            'articles'=>Post::all()
+            'articles'=>Post::latest()->get()
         ]);
+    }
+
+    public function new(): View
+    {
+        return view('admin.article.new', [
+            'tags'=>Tag::all()
+        ]);
+    }
+
+    public function store(NewArticleRequest $request): RedirectResponse
+    {
+        $data = $request->validated();
+        Post::create([
+            'title'=>$data['title'],
+            'content'=>$data['content'],
+            'slug'=>$data['slug'],
+        ])->tags()->sync(str_split($data['tags'], ','));
+        return to_route('admin.article')->with('success', 'Article créé!');
     }
 }

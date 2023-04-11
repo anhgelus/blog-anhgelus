@@ -36,11 +36,12 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)
         Route::get('/', 'index')->name('overview');
         Route::prefix('/article')->name('article')->group(function () {
             Route::get('/', 'article')->name('');
-            Route::get('/article/new', 'article')->name('.new');
-            Route::get('/article/edit/{post}', 'article')->name('.edit')->where([
+            Route::get('/new', 'new')->name('.new');
+            Route::post('/new', 'store');
+            Route::get('/edit/{post}', 'article')->name('.edit')->where([
                 'post'=>'[0-9]+'
             ]);
-            Route::get('/article/delete/{post}', 'article')->name('.delete')->where([
+            Route::get('/delete/{post}', 'article')->name('.delete')->where([
                 'post'=>'[0-9]+'
             ]);
         });
