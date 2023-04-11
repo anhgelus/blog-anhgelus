@@ -3,7 +3,14 @@
 @section('title', $article->title)
 
 @section('hero-title', $article->title)
-@section('hero-subtitle', substr($article->content,0, 50))
+@if(!$article->tags->isEmpty())
+    @section('hero-subtitle')
+        Tags :
+        @foreach($article->tags as $tag)
+            {{ $tag->name }}
+        @endforeach
+    @endsection
+@endif
 
 @section('content')
     <article class="section">
