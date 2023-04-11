@@ -17,7 +17,7 @@
                     @endforeach
                 </p>
             @endif
-            <p>
+            <p class="md-parse preview">
                 {{ substr($article->content,0, 250) }}
             </p>
             <p class="mt-2">

@@ -4,12 +4,15 @@ export function parseMarkdown(element: Element) {
     let content = marked.parse(element.innerHTML.trim());
     element.classList.add('content')
 
-    content = replaceTitles(content)
+    content = replaceTitles(content, element.classList.contains('preview'))
 
     element.innerHTML = content;
 }
 
-function replaceTitles(content: string): string {
+function replaceTitles(content: string, preview = false): string {
+    if (preview) {
+        return removeTitle(content)
+    }
     content = replaceTitle(content, 5);
     content = replaceTitle(content, 4);
     content = replaceTitle(content, 3);
@@ -22,5 +25,9 @@ function replaceTitle(content: string, level: number): string {
     while (content.indexOf(`<h${level} id`) != -1) {
         content = content.replace(`<h${level} id`, `<h${level+1} id`);
     }
-    return content
+    return content;
+}
+
+function removeTitle(content: string): string {
+    return content.replaceAll(/<h[1-6].*>.*<\/h[1-6]>/g, '');
 }
