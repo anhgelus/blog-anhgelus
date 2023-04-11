@@ -16,7 +16,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->string('color'); // hex
             $table->timestamps();
         });
         Schema::create('post_tag', function (Blueprint $table) {

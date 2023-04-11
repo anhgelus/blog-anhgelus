@@ -16,4 +16,9 @@ class Tag extends Model
     {
         return $this->hasMany(Post::class);
     }
+
+    public $fillable = [
+        "name",
+        "description"
+    ];
 }

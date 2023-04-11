@@ -31,7 +31,7 @@
         <div class="field">
             <label class="label" for="tag">Tag.s</label>
             <div class="control">
-                <div class="select">
+                <div class="select is-multiple">
                     <select id="tag" name="tags[]" multiple>
                     @foreach($tags as $tag)
                         <option value="{{$tag->id}}">{{$tag->name}}</option>

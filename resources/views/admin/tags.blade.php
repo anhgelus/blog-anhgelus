@@ -24,8 +24,8 @@
     <section class="section">
         <h3 class="title is-4">Gestion des tags</h3>
         <a class="button is-primary" href="{{ route('admin.tags.new') }}">Nouveau tag</a>
-        @if($stats['post_total'] > 0)
-            <h4 class="title is-5 mt-4">Liste des articles</h4>
+        @if($stats['tag_total'] > 0)
+            <h4 class="title is-5 mt-4">Liste des tags</h4>
             @foreach($tags as $tag)
                 <div class="mt-2 is-flex is-align-content-center is-align-items-center">
                     <p>

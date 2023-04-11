@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\NewArticleRequest;
+use App\Http\Requests\NewTagRequest;
 use App\Models\Post;
 use App\Models\Tag;
 use Illuminate\Http\RedirectResponse;
@@ -42,7 +43,7 @@ class AdminController extends Controller
             'title'=>$data['title'],
             'content'=>$data['content'],
             'slug'=>$data['slug'],
-        ])->tags()->sync(str_split($data['tags'], ','));
+        ])->tags()->sync($data['tags']);
         return to_route('admin.article')->with('success', 'Article créé!');
     }
 
@@ -56,5 +57,20 @@ class AdminController extends Controller
             'tags'=>Tag::all(),
             "stats"=>$stats
         ]);
+    }
+
+    public function newTag(): View
+    {
+        return view('admin.tags.new');
+    }
+
+    public function storeTag(NewTagRequest $request): RedirectResponse
+    {
+        $data = $request->validated();
+        Tag::create([
+            'name'=>$data['name'],
+            'description'=>$data['description'],
+        ]);
+        return to_route('admin.tags')->with('success', 'Tag créé!');
     }
 }
