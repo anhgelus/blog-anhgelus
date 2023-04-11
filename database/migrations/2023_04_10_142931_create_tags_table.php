@@ -19,8 +19,10 @@ return new class extends Migration
             $table->string('color'); // hex
             $table->timestamps();
         });
-        Schema::table('posts', function (Blueprint $table) {
-            $table->foreignIdFor(Tag::class)->constrained()->cascadeOnDelete();
+        Schema::create('post_tag', function (Blueprint $table) {
+            $table->foreignIdFor(\App\Models\Post::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Tag::class)->constrained()->cascadeOnDelete();
+            $table->primary(['post_id', 'tag_id']);
         });
     }
 
@@ -29,9 +31,7 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('post_tag');
         Schema::dropIfExists('tags');
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropForeignIdFor(Tag::class);
-        });
     }
 };

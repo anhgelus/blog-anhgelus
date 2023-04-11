@@ -18,8 +18,8 @@ class Post extends Model
       "content"
     ];
 
-    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function tags(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsTo(Tag::class);
+        return $this->belongsToMany(Tag::class);
     }
 }
