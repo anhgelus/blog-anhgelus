@@ -7,7 +7,7 @@
     @section('hero-subtitle')
         Tags :
         @foreach($article->tags as $tag)
-            {{ $tag->name }}
+            <a class="is-info button ml-2" href="{{route('tag.redirect', ['tag'=>$tag->id])}}">{{ $tag->name }}</a>
         @endforeach
     @endsection
 @endif

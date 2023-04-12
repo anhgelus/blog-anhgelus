@@ -17,7 +17,7 @@
             <h1 class="title is-2">
                 @yield('hero-title', 'Anhgelus Blog')
             </h1>
-            <p class="subtitle is-4">
+            <p class="subtitle is-4 is-align-items-center is-flex">
                 @yield('hero-subtitle', '')
             </p>
         </div>
