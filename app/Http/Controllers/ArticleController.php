@@ -12,7 +12,7 @@ class ArticleController extends Controller
 {
     public function index(): View
     {
-        $paginator = Post::with('tags')->simplePaginate(5);
+        $paginator = Post::with('tags')->latest()->simplePaginate(5);
         return view('article.index', [
             'paginator'=>$paginator
         ]);
