@@ -20,6 +20,15 @@ Route::get('/', function () {
     return view('root');
 })->name('root');
 
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+
 Route::prefix('/article')->name('article.')->controller(ArticleController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/{slug}-{id}', 'read')->name('read')->where([

@@ -34,13 +34,10 @@
                 </a>
 
                 <div class="navbar-dropdown">
-                    <a class="navbar-item">
-                        About
+                    <a class="navbar-item" href="{{route('about')}}">
+                        À propos
                     </a>
-                    <a class="navbar-item">
-                        Jobs
-                    </a>
-                    <a class="navbar-item">
+                    <a class="navbar-item" href="{{route('contact')}}">
                         Contact
                     </a>
                     <hr class="navbar-divider">
