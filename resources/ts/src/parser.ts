@@ -1,7 +1,12 @@
 import {marked} from "marked";
 
 export function parseMarkdown(element: Element) {
-    let content = marked.parse(element.innerHTML.trim());
+    let c = element.innerHTML.trim();
+    let co = c.split('\n');
+    for (let i = 0; i < co.length; i++) {
+        co[i] = co[i].trim()
+    }
+    let content = marked.parse(co.join('\n'));
     element.classList.add('content')
 
     content = replaceTitles(content, element.classList.contains('preview'))
