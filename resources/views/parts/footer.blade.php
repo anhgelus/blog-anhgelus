@@ -1,71 +1,13 @@
-@php
-    $route = request()->route()->getName();
-@endphp
-<nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-        <a class="navbar-item" href="{{ route('root') }}">
-            <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-        </a>
-
-        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-        </a>
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            <strong>Anhgelus Blog</strong> par <a href="https://www.anhgelus.world">William Hergès</a>. Le code source est
+            sous licence <a href="https://raw.githubusercontent.com/anhgelus/blog-anhgelus/main/LICENSE">AGPLv3</a>. Le
+            contenu du site sous <a href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY SA 4.0</a>.
+        </p>
+        <p>
+            Propulsé par <a href="https://laravel.com/">Laravel</a>, par <a href="https://bulma.io/">Bulma</a> et par
+            <a href="https://marked.js.org">Marked</a>.
+        </p>
     </div>
-
-    <div id="navbarBasicExample" class="navbar-menu">
-        <div class="navbar-start">
-            <a @class(["navbar-item", 'is-active' => $route === 'root']) href="{{ route('root') }}">
-                Accueil
-            </a>
-
-            <a @class(["navbar-item", 'is-active' => str_starts_with($route, 'article')]) href="{{route('article.index')}}">
-                Articles
-            </a>
-
-            <a @class(["navbar-item", 'is-active' => str_starts_with($route, 'tag')]) href="{{route('tag.index')}}">
-                Tags
-            </a>
-
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link">
-                    Plus
-                </a>
-
-                <div class="navbar-dropdown">
-                    <a class="navbar-item" href="{{route('about')}}">
-                        À propos
-                    </a>
-                    <a class="navbar-item" href="{{route('contact')}}">
-                        Contact
-                    </a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item" href="https://github.com/anhgelus/blog-anhgelus/issues" target="_blank">
-                        Signaler une erreur
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    @guest()
-                        <a class="button is-primary" href="{{ route('auth.login') }}">
-                            Se connecter
-                        </a>
-                    @endguest
-                    @auth()
-                        <a class="button is-light" href="{{ route('admin.overview') }}">
-                            Panel Admin
-                        </a>
-                        <a class="button is-primary" href="{{ route('auth.logout') }}">
-                            Se déconnecter
-                        </a>
-                    @endauth
-                </div>
-            </div>
-        </div>
-    </div>
-</nav>
+</footer>

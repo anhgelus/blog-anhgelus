@@ -1,3 +1,5 @@
+@php(date_default_timezone_set('Europe/Paris'))
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -43,5 +45,6 @@
         @yield('content')
     </div>
 </section>
+@include('parts.footer')
 </body>
 </html>
