@@ -43,7 +43,7 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)
         Route::post('/article/edit/{post}', 'storeEdit')->where([
             'post'=>'[0-9]+'
         ]);
-        Route::get('/article/delete/{post}', 'article')->name('article.delete')->where([
+        Route::get('/article/delete/{post}', 'delete')->name('article.delete')->where([
             'post'=>'[0-9]+'
         ]);
         Route::get('/tags', 'tags')->name('tags');
@@ -55,7 +55,7 @@ Route::prefix('/admin')->name('admin.')->controller(AdminController::class)
         Route::post('/tags/edit/{tag}', 'storeEditTags')->where([
             'post'=>'[0-9]+'
         ]);
-        Route::get('/tags/delete/{tag}', 'tags')->name('tags.delete')->where([
+        Route::get('/tags/delete/{tag}', 'deleteTags')->name('tags.delete')->where([
             'post'=>'[0-9]+'
         ]);
     });

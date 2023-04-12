@@ -54,6 +54,12 @@ class AdminController extends Controller
         return view('admin.article.edit', ['post'=>$post,'tags'=>Tag::all()]);
     }
 
+    public function delete(Post $post): RedirectResponse
+    {
+        $post->delete();
+        return to_route('admin.article')->with('success', 'Article supprimé!');
+    }
+
     public function storeEdit(Post $post, UpdateArticleRequest $request): RedirectResponse
     {
         $post->update($request->validated());
@@ -96,5 +102,11 @@ class AdminController extends Controller
     {
         $tag->update($request->validated());
         return to_route('admin.tags')->with('success', 'Tag modifié!');
+    }
+
+    public function deleteTags(Tag $tag): RedirectResponse
+    {
+        $tag->delete();
+        return to_route('admin.tags')->with('success', 'Tag supprimé!');
     }
 }
