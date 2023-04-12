@@ -40,8 +40,8 @@
                         Contact
                     </a>
                     <hr class="navbar-divider">
-                    <a class="navbar-item">
-                        Report an issue
+                    <a class="navbar-item" href="https://github.com/anhgelus/blog-anhgelus" target="_blank">
+                        Signaler une erreur
                     </a>
                 </div>
             </div>

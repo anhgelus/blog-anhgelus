@@ -20,9 +20,17 @@
             <p class="md-parse preview">
                 {{ substr($article->content,0, 250) }}
             </p>
-            <p class="mt-2">
-                Lire <a href="{{ route('article.read', [$article->slug, $article->id]) }}">l'article</a> en entier
-            </p>
+            <a class="mt-2 button is-link is-outlined" href="{{ route('article.read', [$article->slug, $article->id]) }}">
+                Lire l'article
+            </a>
         </article>
     @endforeach
+    <div class="ml-auto is-flex is-flex-direction-row-reverse">
+        @if($paginator->hasMorePages())
+            <a class="button is-primary" href="{{$paginator->nextPageUrl()}}">Suite</a>
+        @endif
+        @if(!$paginator->onFirstPage())
+            <a class="button is-primary is-outlined mr-3" href="{{$paginator->previousPageUrl()}}">Précédent</a>
+        @endif
+    </div>
 @endsection
