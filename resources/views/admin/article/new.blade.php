@@ -5,6 +5,8 @@
 @section('hero-title', 'Nouvel article')
 
 @section('content')
+    @include('admin.part.menu')
+    <a class="button is-link is-outlined mb-5" href="{{url()->previous()}}">Revenir à la page précédente</a>
     <form action="" method="post">
         @csrf
         <div class="field">
@@ -32,7 +34,7 @@
             <label class="label" for="tag">Tag.s</label>
             <div class="control">
                 <div class="select is-multiple">
-                    <select id="tag" name="tags[]" multiple>
+                    <select id="tag" name="tags[]" multiple="multiple">
                     @foreach($tags as $tag)
                         <option value="{{$tag->id}}">{{$tag->name}}</option>
                     @endforeach
@@ -57,10 +59,10 @@
 
         <div class="field is-grouped">
             <div class="control">
-                <button class="button is-link">Envoyer</button>
+                <button class="button is-link">Créer</button>
             </div>
             <div class="control">
-                <button class="button is-link is-light" type="reset">Annuler</button>
+                <a class="button is-link is-light" href="{{url()->previous()}}">Annuler</a>
             </div>
         </div>
     </form>

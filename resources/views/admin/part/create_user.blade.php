@@ -24,6 +24,6 @@
 
 <div class="field">
     <div class="control">
-        <button class="button is-link">Submit</button>
+        <button class="button is-link">Créer</button>
     </div>
 </div>

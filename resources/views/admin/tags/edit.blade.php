@@ -5,7 +5,8 @@
 @section('hero-title', 'Éditer le tag "'. substr($tag->title, 0, 10).'"')
 
 @section('content')
-    <a class="button is-link is-outlined mb-5" href="{{route('admin.article')}}">Revenir à la page précédente</a>
+    @include('admin.part.menu')
+    <a class="button is-link is-outlined mb-5" href="{{url()->previous()}}">Revenir à la page précédente</a>
     <form action="" method="post">
         @csrf
         <div class="field">
@@ -32,10 +33,10 @@
 
         <div class="field is-grouped">
             <div class="control">
-                <button class="button is-link" type="submit">Envoyer</button>
+                <button class="button is-link" type="submit">Éditer</button>
             </div>
             <div class="control">
-                <button class="button is-link is-light" type="reset">Annuler</button>
+                <a class="button is-link is-light" href="{{url()->previous()}}">Annuler</a>
             </div>
         </div>
     </form>

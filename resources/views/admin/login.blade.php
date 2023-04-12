@@ -31,10 +31,10 @@
 
         <div class="field is-grouped">
             <div class="control">
-                <button class="button is-link">Submit</button>
+                <button class="button is-link">Se connecter</button>
             </div>
             <div class="control">
-                <button class="button is-link is-light">Cancel</button>
+                <a class="button is-link is-light" href="{{url()->previous()}}">Annuler</a>
             </div>
         </div>
     </form>
