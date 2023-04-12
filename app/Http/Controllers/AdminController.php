@@ -41,11 +41,13 @@ class AdminController extends Controller
     public function store(NewArticleRequest $request): RedirectResponse
     {
         $data = $request->validated();
-        Post::create([
+        $post = Post::create([
             'title'=>$data['title'],
             'content'=>$data['content'],
             'slug'=>$data['slug'],
-        ])->tags()->sync($data['tags']);
+        ]);
+        if (isset($data['tags']))
+            $post->tags()->sync($data['tags']);
         return to_route('admin.article')->with('success', 'Article créé!');
     }
 

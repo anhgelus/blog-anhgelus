@@ -26,7 +26,7 @@ class NewArticleRequest extends FormRequest
             'title'=>'required|min:4',
             'content'=>'required',
             'slug'=>'required|regex:/^[a-z0-9\-]+$/',
-            'tags'=>'required|array|exists:tags,id'
+            'tags'=>'array|exists:tags,id'
         ];
     }
 
