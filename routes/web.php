@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TagController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('root');
+    return view('root', [
+        'articles'=>Post::latest()->simplePaginate(3),
+    ]);
 })->name('root');
 
 Route::get('/about', function () {
