@@ -24,9 +24,13 @@
                 Articles
             </a>
 
+            <a @class(["navbar-item", 'is-active' => str_starts_with($route, 'tag')]) href="{{route('tag.index')}}">
+                Tags
+            </a>
+
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">
-                    More
+                    Plus
                 </a>
 
                 <div class="navbar-dropdown">
@@ -40,7 +44,7 @@
                         Contact
                     </a>
                     <hr class="navbar-divider">
-                    <a class="navbar-item" href="https://github.com/anhgelus/blog-anhgelus" target="_blank">
+                    <a class="navbar-item" href="https://github.com/anhgelus/blog-anhgelus/issues" target="_blank">
                         Signaler une erreur
                     </a>
                 </div>

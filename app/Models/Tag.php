@@ -12,9 +12,9 @@ class Tag extends Model
 {
     use HasFactory;
 
-    public function posts()
+    public function posts(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->hasMany(Post::class);
+        return $this->belongsToMany(Post::class);
     }
 
     public $fillable = [

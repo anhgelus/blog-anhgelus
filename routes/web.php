@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,17 @@ Route::prefix('/article')->name('article.')->controller(ArticleController::class
     Route::get('/{id}', 'redirect')->name('redirect')->where([
             'id' => '[0-9]+'
         ]);
+});
+
+Route::prefix('/tag')->name('tag.')->controller(TagController::class)->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/{slug}-{tag}', 'read')->name('read')->where([
+        'slug' => '[0-9a-z\-]+',
+        'tag' => '[0-9]+'
+    ]);
+    Route::get('/{tag}', 'redirect')->name('redirect')->where([
+        'tag' => '[0-9]+'
+    ]);
 });
 
 Route::prefix('/admin')->name('admin.')->controller(AdminController::class)
