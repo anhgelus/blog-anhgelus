@@ -21,6 +21,7 @@
             </div>
         </div>
     </section>
+    <hr>
     <section class="section">
         <h3 class="title is-4">Gestion des tags</h3>
         <a class="button is-primary" href="{{ route('admin.tags.new') }}">Nouveau tag</a>
